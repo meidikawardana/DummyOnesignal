@@ -92,7 +92,9 @@
 						
 						if (typeof data_json.id !== 'undefined' && typeof data_json.errors === 'undefined') {
 							alert("sukses mengirim notifikasi");
-						}						
+						}else{
+							alert("gagal mengirim notifikasi");
+						}
 						
 						// if(data.saved == 1){ //jika data berhasil disimpan
 							// alert(data.msg); //tampilkan pesan ke user
