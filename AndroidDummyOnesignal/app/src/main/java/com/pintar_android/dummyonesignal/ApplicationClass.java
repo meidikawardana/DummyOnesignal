@@ -5,7 +5,9 @@ import android.app.Application;
 import com.onesignal.OneSignal;
 
 /**
- * Created by Meidika on 31/07/2018.
+ * Class ini adalah obyek dari Application. Kita bisa menuliskan sesuatu di fungsi
+ * onCreate pada class ini, supaya kode tersebut dijalankan ketika aplikasi baru dijalankan
+ * pada hape user.
  */
 public class ApplicationClass extends Application {
 
@@ -13,12 +15,10 @@ public class ApplicationClass extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
-
-        // OneSignal Initialization
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
+        //kita menginisialisasi onesignal dengan 4 baris berikut ini.
+        OneSignal.startInit(this) //mulai proses inisialisasi
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification) //menampilkan notifikasi ketika aplikasi sedang dipakai user
+                .unsubscribeWhenNotificationsAreDisabled(true) //jika notifikasi dinonaktifkan, maka unsubscribe (hapus langganan) user dari onesignal
                 .init();
     }
 

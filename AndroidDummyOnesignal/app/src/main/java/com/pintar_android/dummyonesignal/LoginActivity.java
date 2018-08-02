@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     boolean isLoggingIn = false; //penanda apakah aplikasi sedang memproses login ke server
 
-    String oneSignalUserId = "";
+    String oneSignalUserId = ""; //variabel untuk menyimpan userid onesignal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +64,12 @@ public class LoginActivity extends AppCompatActivity {
         mLoginFormView = findViewById(R.id.login_form); //dapatkan komponen form login dari layout
         mProgressView = findViewById(R.id.login_progress); //dapatkan komponen tampilan loading dari layout
 
+		// update userid onesignal jika saat ini userid onesignal di aplikasi bernilai null atau string kosong
+		// (empty string)
         updateOnesignalUserIdIfNullOrEmpty();
 
-        if(BuildConfig.DEBUG)
-            Log.e("--oneSignalUserId", oneSignalUserId);
+        if(BuildConfig.DEBUG) //jika aplikasi dijalankan dari android studio (mode debug)
+            Log.e("--oneSignalUserId", oneSignalUserId); //tampilkan oneSignalUserId di logcat
 
         if(!GlobalFunctions.getUsername(this).equals("")){ //jika sudah ada user yg login di aplikasi
             Intent HomeActivityIntent = new Intent(getApplicationContext(),HomeActivity.class); //tampilkan HomeActivity (layar utama)
@@ -76,12 +78,22 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+	// fungsi ini untuk mengupdate userid onesignal jika saat ini userid onesignal di aplikasi
+	// bernilai null atau string kosong (empty string)
+	// PERHATIAN: FUNGSI INI BISA SAJA TIDAK JALAN & OUTPUTNYA TETAP USERID ONESIGNAL BERNILAI NULL / EMPTY STRING
     private void updateOnesignalUserIdIfNullOrEmpty() {
+    	//jika userid onesignal di hape adalah null atau empty string (string kosong)
         if(oneSignalUserId == null || oneSignalUserId.equals("")){
+        	// mendapatkan status berlangganan user terhadap onesignal
+			// data ini didapat dari server onesignal
             OSPermissionSubscriptionState status = OneSignal.getPermissionSubscriptionState();
+
+            //mendapatkan userid dari data langganan (subscription) user
             oneSignalUserId = status.getSubscriptionStatus().getUserId();
         }
 
+        //jika data dari server onesignal bernilai null, kita harus membuatnya menjadi empty string
+		//supaya aplikasi tidak error ketika menggunakan userid onesignal yang bernilai null
         if(oneSignalUserId == null)
             oneSignalUserId = "";
     }
@@ -212,9 +224,9 @@ public class LoginActivity extends AppCompatActivity {
                             GlobalFunctions.setCurrentUser(getApplicationContext(), currentUser);
 
 							JSONObject tags = new JSONObject();
-							tags.put("user_id", aUserJO.getInt("id"));
-							tags.put("user_name", aUserJO.getString("username"));
-							OneSignal.sendTags(tags);
+							tags.put("user_id", aUserJO.getInt("id")); //set tag user_id di server onesignal. nilainya dari id user di mysql
+							tags.put("user_name", aUserJO.getString("username")); //set tag user_name di server onesignal. nilainya dari username di mysql
+							OneSignal.sendTags(tags); //kirim tag ke server onesignal
 
                             //tampilkan halaman utama
                             Intent HomeActivityIntent = new Intent(getApplicationContext(),HomeActivity.class);
@@ -262,7 +274,7 @@ public class LoginActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username); //mengirim username ke server
                 params.put("pass",Enkripsi_MD5(password)); //mengirim password ke server
-                params.put("oneSignalUserId", oneSignalUserId);
+                params.put("oneSignalUserId", oneSignalUserId); //mengirim userid onesignal ke server
                 return params;
             }
 

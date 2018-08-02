@@ -1,7 +1,8 @@
 package com.pintar_android.dummyonesignal;
 
 /**
- * Created by Meidika on 31/07/2018.
+ * class ini untuk menyimpan variabel2 yang sifatnya konstan / tetap, misalnya URL
+ * yang bisa diakses dari seluruh file java di aplikasi
  */
 public class Constants {
 

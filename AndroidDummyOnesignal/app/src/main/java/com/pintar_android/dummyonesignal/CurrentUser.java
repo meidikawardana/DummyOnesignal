@@ -7,7 +7,7 @@ public class CurrentUser {
     private int id; //variabel untuk menyimpan id user
     private String username; //variabel untuk menyimpan username
     private String name; //variabel untuk menyimpan nama user
-    private String oneSignalUserId;
+    private String oneSignalUserId; //variabel untuk menyimpan userid onesignal, nilainya didapat dari server onesignal
 
     //fungsi ini dijalankan pertama kali ketika class ini dibuat / dipakai. harus ada supaya aplikasi tidak error
     public CurrentUser() {
@@ -18,7 +18,7 @@ public class CurrentUser {
         this.id = id; //simpan id user
         this.username = username; //simpan username
         this.name = name; //simpan nama
-        this.oneSignalUserId = oneSignalUserId;
+        this.oneSignalUserId = oneSignalUserId; //simpan id onesignal
     }
 
     //fungsi ini untuk mendapatkan id user
@@ -36,11 +36,8 @@ public class CurrentUser {
         return name;
     }
 
+    //fungsi ini untuk mendapatkan userid onesignal
     public String getOneSignalUserId() {
         return oneSignalUserId;
-    }
-
-    public void setOneSignalUserId(String oneSignalUserId) {
-        this.oneSignalUserId = oneSignalUserId;
     }
 }
