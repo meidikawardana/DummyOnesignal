@@ -211,6 +211,11 @@ public class LoginActivity extends AppCompatActivity {
                             //simpan obyek user yg sedang login ke shared preferences (semacam session di hape)
                             GlobalFunctions.setCurrentUser(getApplicationContext(), currentUser);
 
+							JSONObject tags = new JSONObject();
+							tags.put("user_id", aUserJO.getInt("id"));
+							tags.put("user_name", aUserJO.getString("username"));
+							OneSignal.sendTags(tags);
+
                             //tampilkan halaman utama
                             Intent HomeActivityIntent = new Intent(getApplicationContext(),HomeActivity.class);
                             startActivity(HomeActivityIntent);

@@ -5,5 +5,5 @@ package com.pintar_android.dummyonesignal;
  */
 public class Constants {
 
-    public static final String BASE_URL = "http://192.168.43.190/DummyOnesignal/"; //ganti IP sesuai IP komputer / server
+    public static final String BASE_URL = "http://192.168.0.12/DummyOnesignal/"; //ganti IP sesuai IP komputer / server
 }

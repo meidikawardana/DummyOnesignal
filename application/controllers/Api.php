@@ -23,12 +23,15 @@ class Api extends CI_Controller {
 			);
 		
 		$fields = array(
-			'app_id' => "b8f1cea4-dc44-40dc-b696-593522ad2d99",
-			'include_player_ids' => array(
-				$a_user->onesignal_userid
-			),
+			'app_id' => "b8f1cea4-dc44-40dc-b696-593522ad2d99"
+			, 'filters' => array(
+				array("field" => "tag", "key" => "user_id", "relation" => "=", "value" => strval($user_id))
+			)
+			// 'include_player_ids' => array(
+				// $a_user->onesignal_userid
+			// ),
 			// 'data' => array("foo" => "bar"),
-			'contents' => $content
+			, 'contents' => $content
 			, 'headings' => $heading
 		);
 		
