@@ -22,8 +22,13 @@ public class HomeActivity extends AppCompatActivity {
 
         CurrentUser currentUser = GlobalFunctions.getCurrentUser(this);
 
+		String oneSignalUserId = currentUser.getOneSignalUserId();
+
+		if(oneSignalUserId.equals(""))
+			oneSignalUserId = "[N/A]";
+
         textView.setText("Selamat datang, "+currentUser.getName()
-                +"\n\nOnesignal UserId Anda adalah: "+currentUser.getOneSignalUserId());
+                +"\n\nOnesignal UserId Anda adalah: "+oneSignalUserId);
 
         bSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
