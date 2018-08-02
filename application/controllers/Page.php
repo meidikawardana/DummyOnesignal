@@ -6,11 +6,11 @@ class Page extends CI_Controller {
 	
 	public function index(){ //ketika halaman ini diakses
 	
-		$this->load->model('users_model');
+		$this->load->model('users_model'); //muat file users_model di folder models
 		
 		$data = array();
-		$data['users'] = $this->users_model->load();
+		$data['users'] = $this->users_model->load(); //memuat semua data user ke variabel $data['users']
 	
-		$this->load->view('main_view', $data); //tampilkan file login.php di folder view
+		$this->load->view('main_view', $data); //tampilkan file main_view.php di folder view
 	}	
 }

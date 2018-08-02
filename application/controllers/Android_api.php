@@ -17,14 +17,14 @@ class Android_api extends CI_Controller {
 		$username = $this->input->post('username');
 		$pass = $this->input->post('pass');		
 		
-		if($username === FALSE || $pass === FALSE){
+		if($username === FALSE || $pass === FALSE){ //jika data username atau password tidak ada / tidak valid
 			$result->status = 0;
-			$result->msg = "Maaf, akses tidak diperbolehkan";
+			$result->msg = "Maaf, akses tidak diperbolehkan"; //tampilkan pesan akses dilarang
 			echo json_encode($result);
 			die();
 		}
 		
-		$oneSignalUserId = $this->input->post('oneSignalUserId');
+		$oneSignalUserId = $this->input->post('oneSignalUserId'); //mendapatkan userid onesignal (nilainya bisa berupa string kosong)
 		
 		//muat file users_model.php dari folder models
 		$this->load->model('users_model');
@@ -40,10 +40,12 @@ class Android_api extends CI_Controller {
 			//jika ada, kirimkan pesan sukses & data user untuk disimpan di aplikasi
 			$a_user = $this->users_model->load_one_user($username, $pass);
 			
+			//buat obyek untuk update userid onesignal di database
 			$params = new stdClass();
 			$params->onesignal_userid = $oneSignalUserId;
 			$params->user_id = $a_user->id;
 			
+			//update userid onesignal di database
 			$this->users_model->update_onesignal_userid($params);
 			
 			$result->status = 1;
