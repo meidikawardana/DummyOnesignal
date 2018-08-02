@@ -36,7 +36,8 @@ public class HomeActivity extends AppCompatActivity {
         //fungsi ini dijalan ketika tombol bSignOut diklik
         bSignOut.setOnClickListener(v -> {
 
-        	
+			OneSignal.deleteTag("user_id"); //menghapus tag user_id di server onesignal untuk user yg sedang login di aplikasi
+			OneSignal.deleteTag("user_name"); //menghapus tag user_name di server onesignal untuk user yg sedang login di aplikasi
 
             GlobalFunctions.removeCurrentUser(HomeActivity.this); //hapus data user yg sedang login
             startActivity(new Intent(getApplicationContext(),LoginActivity.class)); //tampilkan LoginActivity (halaman login)
