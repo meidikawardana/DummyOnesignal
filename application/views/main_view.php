@@ -88,6 +88,12 @@
 						
 						console.log(data);
 						
+						data_json = JSON.parse(data);
+						
+						if (typeof data_json.id !== 'undefined' && typeof data_json.errors === 'undefined') {
+							alert("sukses mengirim notifikasi");
+						}						
+						
 						// if(data.saved == 1){ //jika data berhasil disimpan
 							// alert(data.msg); //tampilkan pesan ke user
 							// location.reload(); //muat ulang halaman web
